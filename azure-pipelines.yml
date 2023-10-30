@@ -18,7 +18,7 @@ steps:
   name: CompileApplication
   inputs:
     command: 'custom'
-    customCommand: 'run build'
+    customCommand: 'run build-only'
     workingDir: 'dummy-test-project'
     
 - script: npm ci
