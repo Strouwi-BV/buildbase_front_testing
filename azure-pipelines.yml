@@ -7,7 +7,6 @@ schedules:
 
 pool:
   vmImage: ubuntu-latest
-  container: mcr.microsoft.com/playwright:v1.39.0-jammy
 
 steps:
 - task: NodeTool@0
