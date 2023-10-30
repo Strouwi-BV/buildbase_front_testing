@@ -16,16 +16,19 @@ steps:
 
 - script: npm ci
   displayName: 'npm ci'
+  workingDirectory: dummy-test-project
 - script: npx playwright install --with-deps
   displayName: 'Install Playwright browsers'
+  workingDirectory: dummy-test-project
 - script: npx playwright test
   displayName: 'Run Playwright tests'
+  workingDirectory: dummy-test-project
   env:
     CI: 'true'
 - task: PublishTestResults@2
   displayName: 'Publish test results'
   inputs:
-    searchFolder: 'test-results'
+    searchFolder: 'dummy-test-project/test-results'
     testResultsFormat: 'JUnit'
     testResultsFiles: 'e2e-junit-results.xml'
     mergeTestResults: true
@@ -34,7 +37,7 @@ steps:
   condition: succeededOrFailed()
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: playwright-report
+    targetPath: dummy-test-project/playwright-report
     artifact: playwright-report
     publishLocation: 'pipeline'
   condition: succeededOrFailed()
