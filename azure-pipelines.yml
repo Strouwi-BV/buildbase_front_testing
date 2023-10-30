@@ -13,13 +13,6 @@ steps:
   inputs:
     versionSpec: '18'
   displayName: 'Install Node.js'
-
-- task: Npm@1
-  name: CompileApplication
-  inputs:
-    command: 'custom'
-    customCommand: 'run build-only'
-    workingDir: 'dummy-test-project'
     
 - script: npm ci
   displayName: 'npm ci'
