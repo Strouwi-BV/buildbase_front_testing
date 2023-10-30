@@ -19,6 +19,7 @@ steps:
   inputs:
     command: 'custom'
     customCommand: 'run build'
+    workingDir: 'dummy-test-project'
     
 - script: npm ci
   displayName: 'npm ci'
