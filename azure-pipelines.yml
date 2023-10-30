@@ -1,5 +1,9 @@
 schedules:
-  - cron: 0 12,20 * * *
+  - cron: '0 12,20 * * *'
+    displayName: Scheduled e2e tests
+    branches:
+      include:
+        - dev
 
 pool:
   vmImage: ubuntu-latest
