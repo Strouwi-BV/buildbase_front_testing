@@ -28,7 +28,7 @@ const config: PlaywrightTestConfig = {
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['junit', { outputFile: 'dummy-test-project/test-results/e2e-junit-results.xml' }]],
+  reporter: [['junit', { outputFile: 'test-results/e2e-junit-results.xml' }]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
@@ -37,7 +37,7 @@ const config: PlaywrightTestConfig = {
     baseURL: 'http://localhost:5173',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'off',
+    trace: 'on-first-retry',
 
     /* Only on CI systems run the tests headless */
     headless: !!process.env.CI
