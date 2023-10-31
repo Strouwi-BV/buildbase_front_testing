@@ -38,7 +38,7 @@ steps:
 - task: PublishTestResults@2
   displayName: 'Publish test results'
   inputs:
-    searchFolder: 'dummy-test-project/test-results'
+    searchFolder: 'dummy-test-project/dummy-test-project/test-results/'
     testResultsFormat: 'JUnit'
     testResultsFiles: 'e2e-junit-results.xml'
     mergeTestResults: true
