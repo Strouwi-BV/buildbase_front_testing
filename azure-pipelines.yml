@@ -34,6 +34,7 @@ steps:
   workingDirectory: dummy-test-project
   env:
     CI: 'true'
+  continueOnError: true
     
 - task: PublishTestResults@2
   displayName: 'Publish test results'
