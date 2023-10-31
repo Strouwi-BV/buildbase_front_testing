@@ -47,7 +47,7 @@ steps:
   condition: succeededOrFailed()
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: playwright-report
+    targetPath: dummy-test-project/playwright-report
     artifact: playwright-report
     publishLocation: 'pipeline'
   condition: succeededOrFailed()
