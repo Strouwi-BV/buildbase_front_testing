@@ -7,4 +7,11 @@ import { test, expect } from '@playwright/test';
 test('visits the app root url', async ({ page }) => {
   await page.goto('/', {waitUntil: 'domcontentloaded'});
   await expect(page.locator('div.greetings > h1')).toHaveText('You did it!');
+  await page.screenshot({ path: 'screenshot.png' });
+})
+
+
+test('fails', async ({ page }) => {
+  await expect(true).toBeFalsy();
+  await page.screenshot({ path: 'screenshot.png' });
 })
