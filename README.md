@@ -13,8 +13,8 @@ With UI
 ```
 npx playwright test --ui
 ```
-![Alt text](image-1.png)
-![Alt text](image-2.png)
+![Alt text](docs/playwright_ui_empty.png)
+![Alt text](docs/playwright_ui_success.png)
 From the UI, ou can run the tests with the play buttons and inspect them.  
 At the top of the window, there is a timeline. At the bottom, you can see more information about the selected test.
 
@@ -22,7 +22,7 @@ At the top of the window, there is a timeline. At the bottom, you can see more i
 ```
 npx playwright show-report
 ```
-![Alt text](image.png)
+![Alt text](docs/playwright_report.png)
 Each test is run on multiple browsers, here you have an overview of their results.
 
 ## How to write tests
