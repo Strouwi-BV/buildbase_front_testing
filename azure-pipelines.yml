@@ -38,16 +38,7 @@ steps:
 - task: PublishTestResults@2
   displayName: 'Publish test results'
   inputs:
-    searchFolder: 'dummy-test-project/test-results/'
     testResultsFormat: 'JUnit'
-    testResultsFiles: 'e2e-junit-results.xml'
+    testResultsFiles: 'dummy-test-project/test-results/*.xml'
     mergeTestResults: true
     failTaskOnFailedTests: true
-    testRunTitle: 'My End-To-End Tests'
-  condition: succeededOrFailed()
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: dummy-test-project/test-results
-    artifact: playwright-report
-    publishLocation: 'pipeline'
-  condition: succeededOrFailed()
