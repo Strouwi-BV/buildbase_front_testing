@@ -1,5 +1,5 @@
 schedules:
-  - cron: '0 12,20 * * *'
+  - cron: '0 11,19 * * *'
     displayName: Scheduled e2e tests
     branches:
       include:
