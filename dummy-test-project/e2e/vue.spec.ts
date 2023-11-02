@@ -10,6 +10,6 @@ test('visits the app root url', async ({ page }) => {
 })
 
 
-// test('fails', async () => {
-//   await expect(true).toBeFalsy();
-// })
+test('fails', async () => {
+  await expect(true).toBeFalsy();
+})
