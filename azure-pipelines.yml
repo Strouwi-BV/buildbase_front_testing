@@ -1,4 +1,5 @@
 schedules:
+#UTC time
   - cron: '0 11,19 * * *'
     displayName: Scheduled e2e tests
     branches:
@@ -34,6 +35,7 @@ steps:
   workingDirectory: dummy-test-project
   env:
     CI: 'true'
+  #Needed to run the publish test results task
   continueOnError: true
     
 - task: PublishTestResults@2
