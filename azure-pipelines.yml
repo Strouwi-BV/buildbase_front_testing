@@ -5,6 +5,7 @@ schedules:
     branches:
       include:
         - dev
+    always: true
 
 pool:
   vmImage: ubuntu-latest
