@@ -16,19 +16,20 @@
 
 # Project setup
 
-It's a typescript project executing integration, end-to-end testing using the [Playwright](https://playwright.dev/) framework. 
+It's a typescript project executing integration, end-to-end testing using the [Playwright](https://playwright.dev/) framework.
 
+Tests get automatically executed on Azure devops.  
+[![Build Status](https://dev.azure.com/strouwi/Buildbase/_apis/build/status%2FStrouwi-BV.buildbase_front_testing?branchName=dev)](https://dev.azure.com/strouwi/Buildbase/_build/latest?definitionId=80&branchName=dev)
 
-The pipeline will trigger 
+The [integration-testing.yml](/azure/integration-testing.yml) pipeline will trigger 
 - whenever changes are made on the dev branch
 - every day at 12:00 and 20:00
 
-The project will be build and Playwright will execute the tests. The tests are then published and can be found under the "Tests" section of the Azure job.
+The tests are then published and can be found under the "Tests" section of the Azure job.
 ![Azure tests](docs/azure_tests.png)
 
-See :clipboard: ef
 
-For each job, a message will be send in the "playwright-results" channel on Slack.
+:mega: For each job, a message will be send in the "Azure" channel on Slack.
 
 # How to use playwright
 ## Install
