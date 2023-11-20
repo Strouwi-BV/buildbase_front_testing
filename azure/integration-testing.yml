@@ -1,11 +1,19 @@
 schedules:
-#UTC time
+    # UTC time - being scheduled as 12h - 20h
   - cron: '0 11,19 * * *'
     displayName: Scheduled e2e tests
     branches:
       include:
         - dev
     always: true
+
+trigger:
+  - dev
+
+pr:
+  branches:
+    exclude:
+      - '*'
 
 pool:
   vmImage: ubuntu-latest

@@ -1,6 +1,6 @@
 {
-  "name": "dummy-test-project",
-  "version": "0.0.0",
+  "name": "buildbase_front_testing",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "dev": "vite",
