@@ -1,5 +1,5 @@
 schedules:
-#UTC time
+    # UTC time - being scheduled as 12h - 20h
   - cron: '0 11,19 * * *'
     displayName: Scheduled e2e tests
     branches:
@@ -7,42 +7,36 @@ schedules:
         - dev
     always: true
 
+trigger:
+  - dev
+
+pr:
+  branches:
+    exclude:
+      - '*'
+
 pool:
   vmImage: ubuntu-latest
 
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '18'
+    versionSpec: '20'
   displayName: 'Install Node.js'
-    
 - script: npm ci
   displayName: 'npm ci'
-  workingDirectory: dummy-test-project
-  env:
-    CI: 'true'
 - script: npx playwright install --with-deps
   displayName: 'Install Playwright browsers'
-  workingDirectory: dummy-test-project
+- script: npm run test
+  displayName: 'Run tests'
   env:
     CI: 'true'
-- script: npm run build
-  displayName: 'Build'
-  workingDirectory: dummy-test-project
-  env:
-    CI: 'true'
-- script: npm run test:e2e
-  displayName: 'Run Playwright tests'
-  workingDirectory: dummy-test-project
-  env:
-    CI: 'true'
-  #Needed to run the publish test results task
+  # continue task even if tests failed or went on error, to publish the current test results
   continueOnError: true
-    
 - task: PublishTestResults@2
   displayName: 'Publish test results'
   inputs:
     testResultsFormat: 'JUnit'
-    testResultsFiles: 'dummy-test-project/test-results/*.xml'
+    testResultsFiles: 'test-results/*.xml'
     mergeTestResults: true
     failTaskOnFailedTests: true
