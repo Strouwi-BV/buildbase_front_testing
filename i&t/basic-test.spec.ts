@@ -11,9 +11,9 @@ test.describe('azure dev', () => {
   
 test.describe('Trial subscription', () => {
   test.use({baseURL: 'https://backoffice-dev.buildbase.be'});
-  test.setTimeout(60000);
+ 
 
-  test('test', async ({ page }) => {
+  test('Trial subscription account', async ({ page }) => {
     await page.goto('https://backoffice-dev.buildbase.be/');
     await page.getByRole('link', { name: 'Registreer.' }).click();
     await page.locator('#input-58').click();
