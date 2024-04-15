@@ -31,5 +31,7 @@ test.describe('Trial subscription', () => {
     await page.getByText('Gratis proefversie').click();
     await page.locator('.v-input__slot > .v-input--selection-controls__input > .v-input--selection-controls__ripple').first().click();
     await page.getByRole('button', { name: 'Start 30 dagen gratis' }).click();
+    await page.waitForNavigation({ timeout: 5000 });
+    await expect(page.url()).toBe("https://backoffice-dev.buildbase.be/calendar")
   });
 })
