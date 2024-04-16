@@ -1,4 +1,3 @@
-// utils.js
 async function login(page) {
 
     await page.goto('https://backoffice-dev.buildbase.be/login');
@@ -9,8 +8,6 @@ async function login(page) {
     await page.getByRole('button', { name: 'Inloggen' }).click();
     await page.waitForNavigation();
 
-
-    
   }
   
   module.exports = {
