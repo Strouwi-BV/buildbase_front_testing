@@ -31,6 +31,13 @@ The tests are then published and can be found under the "Tests" section of the A
 
 :mega: For each job, a message will be send in the "Azure" channel on Slack.
 
+# Conventions
+## folder structure
+
+<div align="center">
+    <img src="docs/folderStructure.jpg" alt="Folder Structure">
+</div>
+
 # How to use playwright
 ## Install
 ```
