@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-const { login } = require('./login');
+const { login } = require("../Utils/login");
 
 test.beforeEach('Login', async ({ page }) => {
   await login(page);
