@@ -1,7 +1,5 @@
 import { test, expect } from "@playwright/test";
 
-const generateRandomEmail = require("../Utils/generateEmail.ts");
-
 test("test", async ({ page }) => {
   await page.goto("https://backoffice-dev.buildbase.be/payment");
 
@@ -11,9 +9,9 @@ test("test", async ({ page }) => {
 
   await page.locator("(//input[@type='text'])[3]").fill("Richards");
 
-  const email = generateRandomEmail();
-
-  await page.locator("//input[@type='email']").fill(email); // Verander email
+  await page
+    .locator("//input[@type='email']")
+    .fill("PaidRegistration3.strouwi@google.com"); // Verander email
 
   await page.locator("(//input[@type='password'])[1]").fill("testing7894");
 
