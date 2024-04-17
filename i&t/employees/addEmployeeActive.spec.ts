@@ -7,7 +7,7 @@ test.beforeEach("Login", async ({ page }) => {
   await login(page);
 });
 
-test("test", async ({ page }) => {
+test("addEmployeeActiveTest", async ({ page }) => {
   await page.getByRole("link", { name: "Werknemers" }).click();
   await page.getByRole("button", { name: "Nieuwe werknemer" }).click();
   await page.getByLabel("Voornaam").fill("Ed");
