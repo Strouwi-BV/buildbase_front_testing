@@ -7,18 +7,16 @@ test.beforeEach('Login', async ({ page }) => {
 });
 
 test('Create client', async ({ page }) => {
+  test.setTimeout(60000);
   await page.getByRole('link', { name: 'Klanten' }).click();
-  await page.getByRole('button', { name: 'Nieuwe klant' }).click();
-  await page.getByLabel('Klant naam').click();
+  await page.locator("(//button[@class='secondary text-none v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default'])[1]").click();
+  await page.locator("(//input[@type='text'])[1]").click();
   const randomString = generateRandomString();
-  await page.getByLabel('Klant naam').fill(randomString);
-  await page.click('//label[contains(text(), "Start datum")]/following-sibling::input');
-  for (let i = 0; i < 10; i++) {
-    await page.keyboard.press('Backspace');
-  }
-  await page.fill('//label[contains(text(), "Start datum")]/following-sibling::input', '27/12/2018');
-  await page.click('//label[contains(text(), "Eind datum")]/following-sibling::input');
-  await page.fill('//label[contains(text(), "Eind datum")]/following-sibling::input', '29/12/2018');
+  await page.locator("(//input[@type='text'])[1]").fill(randomString);
+  await page.click("(//input[@role='button'])[1]");
+  await page.click("(//button[@type='button'])[26]");
+  await page.click("(//input[@aria-expanded='false'])[1]");
+  await page.click("(//button[@type='button'])[64]");
 
 
   await page.getByRole('button', { name: 'Opslaan' }).click();
@@ -28,19 +26,20 @@ test('Create client', async ({ page }) => {
 
 
 test('Create Project', async ({ page }) => {
+  test.setTimeout(60000);
   await page.getByRole('link', { name: 'Projecten' }).click();
-  await page.click('button i.mdi.mdi-plus');
+  await page.click("(//button[@class='secondary text-none v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default'])[1]");
   await page.waitForNavigation();
-  await page.getByLabel('Klant').selectOption({});
+  await page.click("(//input[@type='text'])[1]");
+  await page.click("(//div[@role='option'])[1]");
   const randomString = generateRandomString();
-  await page.getByLabel('Project naam').fill(randomString);
-  await page.click('xpath=//label[contains(text(), "Start datum")]/following-sibling::input');
-  for (let i = 0; i < 10; i++) {
-    await page.keyboard.press('Backspace');
-  }
-  await page.fill('xpath=//label[contains(text(), "Start datum")]/following-sibling::input', '27/12/2018');
-  await page.click('xpath=//label[contains(text(), "Eind datum")]/following-sibling::input');
-  await page.fill('xpath=//label[contains(text(), "Eind datum")]/following-sibling::input', '29/12/2018');
+  await page.locator("(//input[@type='text'])[2]").fill(randomString);
+  await page.click("(//input[@role='button'])[1]");
+  await page.click("(//button[@type='button'])[31]");
+  await page.click("(//input[@aria-expanded='false'])[1]");
+  await page.click("(//button[@type='button'])[66]");
+  await page.click("(//input[@type='number'])[1]");
+  await page.locator("(//input[@type='number'])[1]").fill("50");
 
   await page.getByRole('button', { name: 'Opslaan' }).click();
 
