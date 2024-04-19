@@ -108,8 +108,6 @@ test('Clocking process - WebKit', async ({ browserName, page }) => {
     await page.waitForTimeout(60000);
     await page.locator("(//span[normalize-space()='Stop'])[1]").click();
     await page.locator("(//button[@class='text-none pl-0 v-btn v-btn--text theme--light v-size--default grey--text'])[1]").isVisible();
-
-   
   }
 });
 
