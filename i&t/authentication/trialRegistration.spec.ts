@@ -1,7 +1,7 @@
-
 import { test, expect } from '@playwright/test';
 import { TIMEOUT } from 'dns';
 const generateRandomEmail = require("../Utils/generateEmail");
+const generateRandomString = require("../Utils/randomString")
 
 test.describe('Trial subscription', () => {
     test.use({baseURL: 'https://backoffice-dev.buildbase.be'});
@@ -13,12 +13,17 @@ test.describe('Trial subscription', () => {
       await page.locator("(//input[@type='text'])[1]").click();
       await page.locator("(//input[@type='text'])[1]").fill('buildByMe');
       await page.locator("(//input[@type='text'])[2]").click();
-      await page.locator("(//input[@type='text'])[2]").fill('Kyan');
+      const randomstring = generateRandomString();
+      await page.locator("(//input[@type='text'])[2]").fill(randomstring);
       await page.locator("(//input[@type='text'])[3]").click();
-      await page.locator("(//input[@type='text'])[3]").fill('Decerf');
+      await page.locator("(//input[@type='text'])[3]").fill('Kyan');
+      await page.locator("(//input[@type='text'])[4]").click();
+      await page.locator("(//input[@type='text'])[4]").fill('Decerf');
       await page.locator("(//input[@type='email'])[1]").click();
       const randomEmail = generateRandomEmail();
       await page.locator("(//input[@type='email'])[1]").fill(randomEmail);
+      await page.locator("(//input[@type='text'])[5]").click();
+      await page.locator("(//input[@type='text'])[5]").fill(randomstring);
       await page.locator("(//input[@type='password'])[1]").click();
       await page.fill("(//input[@type='password'])[1]",'Test123');
       await page.click("(//input[@tabindex='NaN'])[1]");
@@ -30,4 +35,3 @@ test.describe('Trial subscription', () => {
       await expect(page.url()).toBe("https://backoffice-dev.buildbase.be/calendar")
     });
   })
-
