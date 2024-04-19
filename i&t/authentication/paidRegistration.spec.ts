@@ -1,9 +1,10 @@
 import { test, expect } from "@playwright/test";
-import { TIMEOUT } from "dns";
+
 const generateRandomEmail = require("../Utils/generateEmail.ts");
 test("paidRegistrationTest", async ({ page }) => {
+  await page.waitForLoadState();
   await page.goto("https://backoffice-dev.buildbase.be/payment", {
-    timeout: 120000,
+    waitUntil: "domcontentloaded",
   });
   await page.locator("(//input[@type='text'])[1]").fill("Paid registration");
   await page.locator("(//input[@type='text'])[2]").fill("5184484151115");
@@ -38,7 +39,7 @@ test("paidRegistrationTest", async ({ page }) => {
   await page.waitForTimeout(2000);
   await page.locator("(//span[normalize-space()='Naar betaling'])[1]").click();
   await page.locator("(//input[@value='Submit status'])[1]").click();
-  await page.waitForNavigation({ timeout: 5000 });
+
   await expect(page.locator("text=Uw betaling is succesvol")).toHaveText(
     " Uw betaling is succesvol verwerkt!  Ga naar de home pagina of ga naar instellingen om de status van uw abonnement te bekijken. "
   );
