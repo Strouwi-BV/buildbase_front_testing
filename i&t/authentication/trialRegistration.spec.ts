@@ -1,3 +1,4 @@
+
 import { test, expect } from '@playwright/test';
 import { TIMEOUT } from 'dns';
 const generateRandomEmail = require("../Utils/generateEmail");
@@ -29,3 +30,4 @@ test.describe('Trial subscription', () => {
       await expect(page.url()).toBe("https://backoffice-dev.buildbase.be/calendar")
     });
   })
+
