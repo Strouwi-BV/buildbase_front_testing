@@ -11,5 +11,8 @@
     "@playwright/test": "^1.43.1",
     "@types/node": "^20.9.2",
     "vite": "^5.0.0"
+  },
+  "dependencies": {
+    "playwright": "^1.43.1"
   }
 }
