@@ -94,7 +94,7 @@ test('double clocking', async ({ browserName, page }) => {
   const today = huidigeDatum.getDate().toString();
   await page.click(`(//span[normalize-space()='${today}'])[1]`);
   await page.click("(//span[normalize-space()='Registreer uren'])[1]");
-  await page.waitForNavigation({ waitUntil: 'load' });
+  //await page.waitForNavigation();
   await page.getByLabel('Van').click();
   await page.getByLabel('Van').fill('07:00');
   await page.keyboard.press('A')
@@ -109,7 +109,6 @@ test('double clocking', async ({ browserName, page }) => {
 
   await expect(page.getByText('Er bestaat al een')).toBeVisible();
 });
-
 
 test('double abscence', async ({ browserName, page }) => {
   await login(page);
@@ -155,31 +154,37 @@ test('edit clocking  -  webkit', async ({ browserName, page }) => {
     await page.click(`(//span[normalize-space()='${today}'])[1]`);
     await page.waitForTimeout(5000);
     await page.click("(//span[normalize-space()='Registreer uren'])[1]");
-  await page.waitForNavigation({ waitUntil: 'load' });
+    await page.waitForNavigation();
 
-  const uur1 = Math.floor(Math.random() * 4) + 21; // Getal tussen 21 en 24
-  const minuut1 = Math.floor(Math.random() * 60);
-  const uur2 = uur1 === 24 ? 21 : uur1 ; 
-  const minuut2 = minuut1 + 5; // Voeg 5 minuten toe aan het tweede tijdstip
+    const huidigeTijd = new Date();
+    const uur1 = huidigeTijd.getHours();
+    const minuut1 = huidigeTijd.getMinutes();
+    const uur2 = uur1;
+    const minuut2 = minuut1 + 5;
 
+    await page.getByLabel('Van').click();
+    await page.getByLabel('Van').fill(`${uur1 < 10 ? '0' + uur1 : uur1}:${minuut1 < 10 ? '0' + minuut1 : minuut1}`);
 
-  await page.getByLabel('Van').click();
-        await page.getByLabel('Van').fill(`${uur1 < 10 ? '0' + uur1 : uur1}:${minuut1 < 10 ? '0' + minuut1 : minuut1}`);
+    // Vul het tweede tijdstip in
+    await page.getByLabel('Tot').click();
+    await page.getByLabel('Tot').fill(`${uur2 < 10 ? '0' + uur2 : uur2}:${minuut2 < 10 ? '0' + minuut2 : minuut2}`);
 
-        // Vul het tweede tijdstip in
-        await page.getByLabel('Tot').click();
-        await page.getByLabel('Tot').fill(`${uur2 < 10 ? '0' + uur2 : uur2}:${minuut2 < 10 ? '0' + minuut2 : minuut2}`);
-  await page.click("(//input[@type='text'])[1]");
-  await page.click("(//div[@class='v-list-item__content'])[1]");
-  await page.click("(//i[@class='v-icon notranslate mdi mdi-menu-down theme--light error--text'])[1]");
-  await page.keyboard.press('ArrowDown');
-  await page.keyboard.press('Enter');
-  await page.getByRole("button", { name: "opslaan" }).click();
+    await page.click("(//input[@type='text'])[1]");
+    await page.click("(//div[@class='v-list-item__content'])[1]");
+    await page.click("(//i[@class='v-icon notranslate mdi mdi-menu-down theme--light error--text'])[1]");
+    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('Enter');
+    await page.getByRole("button", { name: "opslaan" }).click();
     await page.locator("(//button[@type='button'])[7]").click();
+    await page.getByLabel('Van').click();
+    await page.getByLabel('Van').fill(`${uur1 < 10 ? '0' + uur1 : uur1}:${minuut1 < 10 ? '0' + minuut1 : minuut1}`);
+    await page.getByLabel('Tot').click();
+    await page.getByLabel('Tot').fill(`${uur2 < 10 ? '0' + uur2 : uur2}:${minuut2 < 10 ? '0' + minuut2 : minuut2}`);
     await page.getByRole('button', { name: 'Opslaan' }).click();
     await expect(page.getByText('Prikking werd gewijzigd')).toBeVisible();
   }
 });
+
 
 test.only('edit clocking  -  chromium', async ({ browserName, page }) => {
   if (browserName === 'chromium') {
@@ -193,33 +198,38 @@ test.only('edit clocking  -  chromium', async ({ browserName, page }) => {
       await page.waitForNavigation();
       //  afwezigheid  wijzigen
       const huidigeDatum = new Date();
-      const today = huidigeDatum.getDate().toString();
-      await page.click(`(//span[normalize-space()='${today}'])[1]`);
-      await page.waitForTimeout(5000);
-      await page.click("(//span[normalize-space()='Registreer uren'])[1]");
-    await page.waitForNavigation({ waitUntil: 'load' });
-  
-    const uur1 = Math.floor(Math.random() * 4) + 21; // Getal tussen 21 en 24
-    const minuut1 = Math.floor(Math.random() * 60);
-    const uur2 = uur1 === 24 ? 21 : uur1 ; 
-    const minuut2 = minuut1 + 5; // Voeg 5 minuten toe aan het tweede tijdstip
-  
-  
+    const today = huidigeDatum.getDate().toString();
+    await page.click(`(//span[normalize-space()='${today}'])[1]`);
+    await page.waitForTimeout(5000);
+    await page.click("(//span[normalize-space()='Registreer uren'])[1]");
+    await page.waitForNavigation();
+
+    const huidigeTijd = new Date();
+    const uur1 = huidigeTijd.getHours()+ 1 ;
+    const minuut1 = huidigeTijd.getMinutes();
+    const uur2 = uur1;
+    const minuut2 = minuut1 + 5;
+
     await page.getByLabel('Van').click();
-          await page.getByLabel('Van').fill(`${uur1 < 10 ? '0' + uur1 : uur1}:${minuut1 < 10 ? '0' + minuut1 : minuut1}`);
-  
-          // Vul het tweede tijdstip in
-          await page.getByLabel('Tot').click();
-          await page.getByLabel('Tot').fill(`${uur2 < 10 ? '0' + uur2 : uur2}:${minuut2 < 10 ? '0' + minuut2 : minuut2}`);
+    await page.getByLabel('Van').fill(`${uur1 < 10 ? '0' + uur1 : uur1}:${minuut1 < 10 ? '0' + minuut1 : minuut1}`);
+
+    // Vul het tweede tijdstip in
+    await page.getByLabel('Tot').click();
+    await page.getByLabel('Tot').fill(`${uur2 < 10 ? '0' + uur2 : uur2}:${minuut2 < 10 ? '0' + minuut2 : minuut2}`);
+
     await page.click("(//input[@type='text'])[1]");
     await page.click("(//div[@class='v-list-item__content'])[1]");
     await page.click("(//i[@class='v-icon notranslate mdi mdi-menu-down theme--light error--text'])[1]");
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
     await page.getByRole("button", { name: "opslaan" }).click();
-      await page.locator("(//button[@type='button'])[7]").click();
-      await page.getByRole('button', { name: 'Opslaan' }).click();
-      await expect(page.getByText('Prikking werd gewijzigd')).toBeVisible();
+    await page.locator("(//button[@type='button'])[7]").click();
+    await page.getByLabel('Van').click();
+    await page.getByLabel('Van').fill(`${uur1 < 10 ? '0' + uur1 : uur1}:${minuut1 < 10 ? '0' + minuut1 : minuut1}`);
+    await page.getByLabel('Tot').click();
+    await page.getByLabel('Tot').fill(`${uur2 < 10 ? '0' + uur2 : uur2}:${minuut2 < 10 ? '0' + minuut2 : minuut2}`);
+    await page.getByRole('button', { name: 'Opslaan' }).click();
+    await expect(page.getByText('Prikking werd gewijzigd')).toBeVisible();
   }
 });
 test('edit clocking -  firefox', async ({ browserName, page }) => {
