@@ -24,6 +24,8 @@ test("addEmployeeNotActive", async ({ page }) => {
 
   await page.getByLabel("Statuut").fill("Zelfstandige");
 
+  await page.getByLabel("Rijksregisternummer").fill("457812345863");
+
   await page.getByLabel("Rol").click();
   await page.getByRole("option", { name: "Beheerder" }).locator("i").click();
   await page.getByRole("button", { name: "Stel wachtwoord in" }).click();
@@ -33,4 +35,15 @@ test("addEmployeeNotActive", async ({ page }) => {
   await page.getByLabel("Bevestig wachtwoord", { exact: true }).fill("test123");
   await page.locator(".v-input--selection-controls__ripple").click();
   await page.getByRole("button", { name: "Opslaan" }).click();
+
+  await page.waitForSelector(
+    "(//div[contains(text(),'Werknemer werdt succesvol aangemaakt')])[1]"
+  );
+
+  const addedMessage = await page
+    .locator(
+      "(//div[contains(text(),'Werknemer werdt succesvol aangemaakt')])[1]"
+    )
+    .innerText();
+  expect(addedMessage).toContain("Werknemer werdt succesvol aangemaakt");
 });
