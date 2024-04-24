@@ -17,7 +17,11 @@ test("testAbscentRegistrationBt7", async ({ page }) => {
 
   await page.click("//span[normalize-space()='Registreer afwezigheid']");
 
-  await page.getByRole("button", { name: "Afwezigheids type *" }).click();
+  // await page.getByRole("button", { name: "Afwezigheids type *" }).click();
+
+  await page.click(
+    'div.v-input__control:has(label:has-text("Afwezigheids type")) >> .v-input__icon--append'
+  );
 
   await page.click("//div[@role='option']//div[normalize-space()='Verlof']");
 
