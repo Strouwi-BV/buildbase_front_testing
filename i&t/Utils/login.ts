@@ -7,9 +7,6 @@ async function login(page) {
   await page.getByLabel('Wachtwoord', { exact: true }).fill('Test123');
   await page.getByRole('button', { name: 'Inloggen' }).click();
   await page.waitForNavigation();
-
-
-
 }
 
 module.exports = {
