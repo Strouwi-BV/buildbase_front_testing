@@ -24,10 +24,10 @@ test('Create/edit client', async ({ page }) => {
 
   await expect(page.locator('h1').first()).toHaveText(randomString);
 
-  //gaat naar de tweede klant in de lijst
+
   await page.locator("(//a[normalize-space()='Terug naar klanten'])[1]").click();
   await page.locator("(//tr[@class='clickable'])[2]").click();
-  //zet op inactief en weer op actief
+
   await page.getByRole('button', { name: 'Acties' }).click();
   await page.getByText('Zet op inactief').click();
   await page.getByRole('button', { name: 'Bevestig' }).click();
@@ -39,11 +39,11 @@ test('Create/edit client', async ({ page }) => {
   await page.locator("(//a[@class='text-decoration-none clickable'])[1]")
     .first()
     .click();
-  //rename===============================================
+
   await page.locator("(//input[@type='text'])[1]").click();
   await page.locator("(//input[@type='text'])[1]").fill(randomString2);
   await page.locator("(//button[@class='secondary v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default'])[1]").click();
-  //change info==============================================
+
   await page.locator("(//i[@class='v-icon notranslate vertical-align-baseline v-icon--dense mdi mdi-pencil theme--light'])[2]")
     .first()
     .click();
@@ -73,7 +73,6 @@ test('Create/edit client', async ({ page }) => {
   await page.locator("(//i[@class='v-icon notranslate vertical-align-baseline v-icon--dense mdi mdi-pencil theme--light'])[3]")
     .first()
     .click();
-  //change contact===================================
   //firstname
   await page.locator("(//input[@type='text'])[1]").click()
   await page.locator("(//input[@type='text'])[1]").fill('bob');
@@ -93,7 +92,7 @@ test('Create/edit client', async ({ page }) => {
   await page.locator("(//button[@class='secondary v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default'])[1]")
     .first()
     .click();
-  //verwijder===================================================
+
   await page.getByRole('button', { name: 'Acties' }).click();
   await page.getByText('Verwijder').click();
   await page.getByRole('button', { name: 'Bevestig' }).click();
