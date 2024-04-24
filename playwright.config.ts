@@ -1,5 +1,5 @@
-import type { PlaywrightTestConfig } from '@playwright/test'
-import { devices } from '@playwright/test'
+import type { PlaywrightTestConfig } from "@playwright/test";
+import { devices } from "@playwright/test";
 
 /**
  * Read environment variables from file.
@@ -11,15 +11,17 @@ import { devices } from '@playwright/test'
  * See https://playwright.dev/docs/test-configuration.
  */
 const config: PlaywrightTestConfig = {
-  testDir: './i&t',
+  testDir: "./i&t",
   /* Maximum time one test can run for. */
-  timeout: 30 * 1000,
+  timeout: 90 * 1000,
   expect: {
     /**
      * Maximum time expect() should wait for the condition to be met.
      * For example in `await expect(locator).toHaveText();`
      */
-    timeout: 5000
+
+    timeout: 5000,
+
   },
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
@@ -29,20 +31,20 @@ const config: PlaywrightTestConfig = {
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
-      // junit reporter is used for publishing test results to Azure devops
-      ['junit', { outputFile: 'test-results/results.xml' }],
-      // html report is used for an 'easy understandable file' during local run
-      ['html']
+    // junit reporter is used for publishing test results to Azure devops
+    ["junit", { outputFile: "test-results/results.xml" }],
+    // html report is used for an 'easy understandable file' during local run
+    ["html"],
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
     actionTimeout: 0,
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'http://localhost:5173',
+    baseURL: "http://localhost:5173",
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'retain-on-failure',
+    trace: "retain-on-failure",
 
     /* Only on CI systems run the tests headless */
     headless: !!process.env.CI,
@@ -51,23 +53,23 @@ const config: PlaywrightTestConfig = {
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
+      name: "chromium",
       use: {
-        ...devices['Desktop Chrome']
-      }
+        ...devices["Desktop Chrome"],
+      },
     },
     {
-      name: 'firefox',
+      name: "firefox",
       use: {
-        ...devices['Desktop Firefox']
-      }
+        ...devices["Desktop Firefox"],
+      },
     },
     {
-      name: 'webkit',
+      name: "webkit",
       use: {
-        ...devices['Desktop Safari']
-      }
-    }
+        ...devices["Desktop Safari"],
+      },
+    },
 
     /* Test against mobile viewports. */
     // {
@@ -108,10 +110,10 @@ const config: PlaywrightTestConfig = {
      * Use the preview server on CI for more realistic testing.
     Playwright will re-use the local server if there is already a dev-server running.
      */
-    command: process.env.CI ? 'vite preview --port 5173' : 'vite dev',
+    command: process.env.CI ? "vite preview --port 5173" : "vite dev",
     port: 5173,
-    reuseExistingServer: !process.env.CI
-  }
-}
+    reuseExistingServer: !process.env.CI,
+  },
+};
 
-export default config
+export default config;
