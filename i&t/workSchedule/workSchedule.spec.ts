@@ -10,7 +10,6 @@ test.beforeEach('Login', async ({ page }) => {
 test('ScheduleCreate/delete', async ({ page }) => {
     //werkrooster
     test.setTimeout(180000);
-    //gaat naar de werkroosters===============================
     await page.getByRole('link', { name: 'Instellingen' }).click();
     await page.locator("(//div[@class='v-list-item__content ml-1 pa-0 text-uppercase small-caps font-weight-bold'][normalize-space()='Werkroosters'])[1]").click();
     await page.getByRole('button', { name: 'Nieuw werkrooster' }).click();//maakt werkrooster aan
@@ -20,7 +19,6 @@ test('ScheduleCreate/delete', async ({ page }) => {
     //pauze in minuten
     await page.locator("(//input[@type='text'])[2]").click();
     await page.locator("(//input[@type='text'])[2]").fill('50');
-    //zet werkuren===========================
     //werkuren maandag
     await page.locator("(//input[@type='number'])[1]").click();
     await page.locator("(//input[@type='number'])[1]").fill('1');
@@ -42,7 +40,6 @@ test('ScheduleCreate/delete', async ({ page }) => {
     //werkuren zondag
     await page.locator("(//input[@type='number'])[7]").click();
     await page.locator("(//input[@type='number'])[7]").fill('7');
-    //zet werkuren===========================================
     //werkuren maandag
     await page.locator("(//input[@type='time'])[1]").click();
     await page.locator("(//input[@type='time'])[1]").fill('07:00');

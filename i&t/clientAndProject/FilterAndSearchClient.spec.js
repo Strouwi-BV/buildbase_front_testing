@@ -18,6 +18,6 @@ test('FilterAndSearch', async ({ page }) => {
     await page.waitForTimeout(1000);
     await page.locator("(//input[@type='search'])[1]").click();
     await page.locator("(//div)[117]").click();
-    await page.locator("(//input[@type='search'])[1]").fill('test');
+    await page.locator("(//input[@type='search'])[1]").fill('testen');
 
 })
