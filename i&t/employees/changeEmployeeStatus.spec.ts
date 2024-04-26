@@ -38,8 +38,7 @@ test("addEmployeeActiveTest", async ({ page }) => {
     // Controleer of het inactieve element aanwezig is en zichtbaar is
     if (inactiveElement) {
       console.log(`Element ${i} is inactief`);
-      // Voer hier acties uit voor het inactieve element
-      // Bijvoorbeeld, wacht en probeer opnieuw, of ga verder met de volgende iteratie
+      // Hier actie voor het inactieve element
     }
 
     i++;
