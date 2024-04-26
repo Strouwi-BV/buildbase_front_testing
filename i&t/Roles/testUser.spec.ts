@@ -1,6 +1,11 @@
 import { test, expect } from "@playwright/test";
 
-test.beforeEach("Login", async ({ page }) => {
+let page;
+
+test.beforeAll(async ({ browser }) => {
+  const context = await browser.newContext();
+  page = await context.newPage();
+
   await page.goto("https://backoffice-dev.buildbase.be/login");
   await page.getByLabel("Email").click();
   await page.getByLabel("Email").fill("gebruiker@test.com");
@@ -10,7 +15,7 @@ test.beforeEach("Login", async ({ page }) => {
   await page.waitForNavigation();
 });
 
-test("testDifferentUserRolesPageVisibility", async ({ page }) => {
+test("testDifferentUserRolesPageVisibility", async () => {
   const pagesToTest = [
     "https://backoffice-dev.buildbase.be/clients",
     "https://backoffice-dev.buildbase.be/projects",
@@ -32,11 +37,15 @@ test("testDifferentUserRolesPageVisibility", async ({ page }) => {
   }
 });
 
-test("testDifferentUserRolesOnlySeeingTwoPages", async ({ page }) => {
+test("testDifferentUserRolesOnlySeeingTwoPages", async () => {
   await page.goto("https://backoffice-dev.buildbase.be/calendar");
   const numberOfLinks = await page.$$eval(
     ".v-list.py-0.v-sheet.theme--light > div > a",
     (links) => links.length
   );
   await expect(numberOfLinks).toBe(2);
+});
+
+test.afterAll(async () => {
+  await page.context().close();
 });
