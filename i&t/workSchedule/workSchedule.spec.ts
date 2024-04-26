@@ -1,4 +1,5 @@
 
+
 import { test, expect } from '@playwright/test';
 import { time } from 'console';
 const { login } = require("../Utils/login");
@@ -64,7 +65,8 @@ test('ScheduleCreate/delete', async ({ page }) => {
     //click op opslaan
     await page.locator("(//button[@class='secondary v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default'])[1]").click()
     // verwijdert
-    await page.locator("(//button[@class='v-btn v-btn--fab v-btn--icon v-btn--round theme--dark v-size--default primary--text'])[3]").click();
+    //await page.locator("(//button[@class='v-btn v-btn--fab v-btn--icon v-btn--round theme--dark v-size--default primary--text'])[3]").click();
 
 })
+
 
