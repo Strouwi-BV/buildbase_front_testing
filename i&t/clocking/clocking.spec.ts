@@ -189,7 +189,7 @@ test('delete clocking  - webkit', async ({ browserName, page }) => {
   await page.getByLabel('Wachtwoord', { exact: true }).click();
   await page.getByLabel('Wachtwoord', { exact: true }).fill('Test123');
   await page.getByRole('button', { name: 'Inloggen' }).click();
-  await page.waitForNavigation();
+
   
   const huidigeDatum = new Date();
   const today = huidigeDatum.getDate().toString();
