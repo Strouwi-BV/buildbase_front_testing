@@ -8,9 +8,9 @@ test.beforeEach("Login", async ({ page }) => {
 
 test('testSearchInvoice', async ({ page }) => {
   await page.getByRole('link', { name: 'Facturatie' }).click();
-  //zoekt factuurnummer 1 via de zoekbalk
+  //Searching for invoice number 1 with the search bar
   await page.locator("(//input[@type='search'])[1]").fill('1');
-  //openen van de gezochte factuur
+  //Opening the searched invoice
   await page.getByRole('cell', { name: '1', exact: true }).click();
-  await page.getByRole('link', { name: 'Terug naar factuur' }).click();
+  await expect(page.locator('h1').first()).toHaveText("Factuur informatie");
 });
