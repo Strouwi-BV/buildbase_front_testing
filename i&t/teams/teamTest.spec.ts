@@ -2,11 +2,22 @@ import { test } from "@playwright/test";
 const { login } = require("../Utils/login.ts");
 const generateRandomString = require("../Utils/randomString");
 
-test.beforeEach("Login", async ({ page }) => {
+let page;
+
+//Creating a new browser context and then creating a new page within the context,
+//so that every test runs in the same browser session so we don't lose time opening browsers
+test.beforeAll(async ({ browser }) => {
+  const context = await browser.newContext();
+  page = await context.newPage();
   await login(page);
 });
 
-test("testTeamsBT13", async ({ page }) => {
+//closing the browser session after tests
+test.afterAll(async () => {
+  await page.context().close();
+});
+
+test("testTeamsBT13", async () => {
   await page.goto("https://backoffice-dev.buildbase.be/settings/parameters");
 
   // Wait for the checkbox element to appear
