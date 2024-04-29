@@ -9,9 +9,11 @@ test.beforeEach("Login", async ({ page }) => {
 test("addEmployeeActiveTest", async ({browserName, page }) => {
   await page.getByRole("link", { name: "Werknemers" }).click();
 
+  let chromiumTestDone = false;
+  let firefoxTestDone = false;
   if (browserName === 'chromium') {
   await page.waitForURL("https://backoffice-dev.buildbase.be/users");
-  await page.waitForTimeout(10000)
+  await page.waitForSelector('body:has-text("actief")');
   await expect(page.locator('tbody')).toContainText('actief');
   await page.locator("(//span[@class='v-chip__content'][normalize-space()='actief'])[1]").click();
   await expect(page.getByRole('main')).toContainText('Actieve gebruiker');
@@ -22,11 +24,11 @@ test("addEmployeeActiveTest", async ({browserName, page }) => {
   await page.getByRole('button', { name: 'Acties' }).click();
   await page.getByText('Zet op actief').click();
   await page.getByRole('button', { name: 'Bevestig' }).click();
+  chromiumTestDone=true;
   }
-  if (browserName === 'firefox') {
-    await page.waitForTimeout(10000);
+  if (browserName === 'firefox' && chromiumTestDone == true) {
     await page.waitForURL("https://backoffice-dev.buildbase.be/users");
-    await page.waitForTimeout(10000)
+    await page.waitForSelector('body:has-text("actief")');
     await expect(page.locator('tbody')).toContainText('actief');
     await page.locator("(//span[@class='v-chip__content'][normalize-space()='actief'])[1]").click();
     await expect(page.getByRole('main')).toContainText('Actieve gebruiker');
@@ -37,11 +39,11 @@ test("addEmployeeActiveTest", async ({browserName, page }) => {
     await page.getByRole('button', { name: 'Acties' }).click();
     await page.getByText('Zet op actief').click();
     await page.getByRole('button', { name: 'Bevestig' }).click();
+    firefoxTestDone = true;
     }
-    if (browserName === 'webkit') {
-      await page.waitForTimeout(20000);
+    if (browserName === 'webkit' && firefoxTestDone == true) {
       await page.waitForURL("https://backoffice-dev.buildbase.be/users");
-      await page.waitForTimeout(10000)
+      await page.waitForSelector('body:has-text("actief")');
       await expect(page.locator('tbody')).toContainText('actief');
       await page.locator("(//span[@class='v-chip__content'][normalize-space()='actief'])[1]").click();
       await expect(page.getByRole('main')).toContainText('Actieve gebruiker');
