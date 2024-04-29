@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { time } from "console";
 const { login } = require("../Utils/login");
+const generateRandomString = require("../Utils/randomString");
 
 let page; // Declare page variable
 let newName; // Declare newName variable
@@ -88,7 +89,8 @@ test("deleteScheduleTest", async () => {
     .locator("(//i[@class='v-icon notranslate mdi mdi-delete theme--dark'])[3]")
     .click();
 
+  await page.waitForTimeout(5000);
   const deletedElement = await page.$(`text="${newName}"`);
 
-  expect(deletedElement).toBeNull();
+  expect(deletedElement).toBe(null);
 });
