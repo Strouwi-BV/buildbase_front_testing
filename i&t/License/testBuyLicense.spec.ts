@@ -1,20 +1,10 @@
 import { test, expect } from "@playwright/test";
 import { before } from "node:test";
 import { text } from "stream/consumers";
+const { login } = require("../Utils/login.ts");
 
-const {
-  newAccountCredentials,
-} = require("../authentication/trialRegistration.spec.ts");
 test.beforeEach("Login", async ({ page }) => {
-  await page.goto("https://backoffice-dev.buildbase.be/login");
-  await page.getByLabel("Email").click();
-  await page.getByLabel("Email").fill(newAccountCredentials.email);
-  await page.getByLabel("Wachtwoord", { exact: true }).click();
-  await page
-    .getByLabel("Wachtwoord", { exact: true })
-    .fill(newAccountCredentials.password);
-  await page.getByRole("button", { name: "Inloggen" }).click();
-  await page.waitForNavigation();
+  await login(page);
 });
 
 test("get started link", async ({ page }) => {
