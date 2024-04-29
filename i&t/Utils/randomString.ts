@@ -1,5 +1,6 @@
 function generateRandomString() {
   const maxLength = 10;
+
   const randomString =
     "Test" +
     Math.random()
@@ -9,3 +10,4 @@ function generateRandomString() {
 }
 
 module.exports = generateRandomString;
+

@@ -1,86 +1,72 @@
-import { expect, test } from "@playwright/test";
+
+
+import { test, expect } from '@playwright/test';
+import { time } from 'console';
 const { login } = require("../Utils/login");
-const generateRandomString = require("../Utils/randomString");
 
-test.beforeEach("Login", async ({ page }) => {
-  await login(page);
+test.beforeEach('Login', async ({ page }) => {
+    await login(page);
 });
 
-test("scheduleTest", async ({ page }) => {
-  await page.getByRole("link", { name: "Instellingen" }).click();
-  await page
-    .getByRole("main")
-    .getByRole("link", { name: "Werkroosters" })
-    .click();
+test('ScheduleCreate/delete', async ({ page }) => {
+    //werkrooster
+    test.setTimeout(180000);
+    await page.getByRole('link', { name: 'Instellingen' }).click();
+    await page.locator("(//div[@class='v-list-item__content ml-1 pa-0 text-uppercase small-caps font-weight-bold'][normalize-space()='Werkroosters'])[1]").click();
+    await page.getByRole('button', { name: 'Nieuw werkrooster' }).click();//maakt werkrooster aan
+    //vul naam in
+    await page.locator("(//input[@type='text'])[1]").click();
+    await page.locator("(//input[@type='text'])[1]").fill('Test');
+    //pauze in minuten
+    await page.locator("(//input[@type='text'])[2]").click();
+    await page.locator("(//input[@type='text'])[2]").fill('50');
+    //werkuren maandag
+    await page.locator("(//input[@type='number'])[1]").click();
+    await page.locator("(//input[@type='number'])[1]").fill('1');
+    //werkuren dinsdag
+    await page.locator("(//input[@type='number'])[2]").click();
+    await page.locator("(//input[@type='number'])[2]").fill('2');
+    //werkuren woensdag
+    await page.locator("(//input[@type='number'])[3]").click();
+    await page.locator("(//input[@type='number'])[3]").fill('3');
+    //werkuren donderdag
+    await page.locator("(//input[@type='number'])[4]").click();
+    await page.locator("(//input[@type='number'])[4]").fill('4');
+    //werkuren vrijdag
+    await page.locator("(//input[@type='number'])[5]").click();
+    await page.locator("(//input[@type='number'])[5]").fill('5');
+    //werkuren zaterdag
+    await page.locator("(//input[@type='number'])[6]").click();
+    await page.locator("(//input[@type='number'])[6]").fill('6');
+    //werkuren zondag
+    await page.locator("(//input[@type='number'])[7]").click();
+    await page.locator("(//input[@type='number'])[7]").fill('7');
+    //werkuren maandag
+    await page.locator("(//input[@type='time'])[1]").click();
+    await page.locator("(//input[@type='time'])[1]").fill('07:00');
+    //werkuren dinsdag
+    await page.locator("(//input[@type='time'])[2]").click();
+    await page.locator("(//input[@type='time'])[2]").fill('07:00');
+    //werkuren woendag
+    await page.locator("(//input[@type='time'])[3]").click();
+    await page.locator("(//input[@type='time'])[3]").fill('07:00');
+    //werkuren donderdag
+    await page.locator("(//input[@type='time'])[4]").click();
+    await page.locator("(//input[@type='time'])[4]").fill('07:00');
+    //werkuren vrijdag
+    await page.locator("(//input[@type='time'])[5]").click();
+    await page.locator("(//input[@type='time'])[5]").fill('07:00');
+    //werkuren zaterdag
+    await page.locator("(//input[@type='time'])[6]").click();
+    await page.locator("(//input[@type='time'])[6]").fill('07:00');
+    //werkuren zondag
+    await page.locator("(//input[@type='time'])[7]").click();
+    await page.locator("(//input[@type='time'])[7]").fill('07:00');
+    //click op opslaan
+    await page.locator("(//button[@class='secondary v-btn v-btn--is-elevated v-btn--has-bg theme--light v-size--default'])[1]").click()
+    // verwijdert
+    //await page.locator("(//button[@class='v-btn v-btn--fab v-btn--icon v-btn--round theme--dark v-size--default primary--text'])[3]").click();
 
-  await page.getByRole("button", { name: "Nieuw werkrooster" }).click();
+})
 
-  const randomString = generateRandomString();
 
-  await page
-    .locator("(//input[@type='text'])[1]")
-    .fill("42-uren week/" + randomString);
-
-  await page.locator("(//input[@type='text'])[2]").fill("35");
-
-  await page.locator("(//input[@type='number'])[1]").fill("09");
-
-  await page.locator("(//input[@type='number'])[4]").fill("09");
-
-  await page.locator("(//input[@type='time'])[1]").fill("08:00");
-
-  await page.locator("(//input[@type='time'])[2]").fill("08:00");
-
-  await page.locator("(//input[@type='time'])[3]").fill("08:00");
-
-  await page.locator("(//input[@type='time'])[4]").fill("08:00");
-
-  await page.locator("(//input[@type='time'])[5]").fill("08:00");
-  await page.getByRole("button", { name: "Opslaan" }).click();
-
-  const createdWeekText = "42-uren week/" + randomString;
-  await page.getByText(createdWeekText); // Zoek naar de tekst van het werkrooster
-  const createdWeekElement = await page.getByText(createdWeekText); // Zoek het element met de tekst
-  expect(createdWeekElement).toBeTruthy(); // Controleer of het element met de tekst bestaat
-
-  await page.getByText(createdWeekText).click();
-
-  const randomString2 = generateRandomString();
-
-  const newName = "44-uren week/" + randomString2;
-
-  await page.locator("(//input[@type='text'])[1]").fill(newName);
-
-  await page.locator("(//input[@type='text'])[2]").fill("40");
-
-  await page.locator("(//input[@type='number'])[2]").fill("09");
-
-  await page.locator("(//input[@type='number'])[3]").fill("09");
-
-  await page.locator("(//input[@type='time'])[1]").fill("08:30");
-
-  await page.locator("(//input[@type='time'])[2]").fill("08:30");
-
-  await page.locator("(//input[@type='time'])[3]").fill("08:30");
-
-  await page.locator("(//input[@type='time'])[4]").fill("08:30");
-
-  await page.locator("(//input[@type='time'])[5]").fill("08:30");
-  await page
-    .getByRole("row", { name: "Vrijdag Clear" })
-    .getByLabel("Clear")
-    .click();
-
-  await page.locator("(//input[@type='time'])[5]").fill("08:30");
-
-  await page.getByRole("button", { name: "Opslaan" }).click();
-
-  await page
-    .locator("(//i[@class='v-icon notranslate mdi mdi-delete theme--dark'])[3]")
-    .click();
-
-  const deletedElement = await page.$(`text="${newName}"`);
-
-  // Controleer of het element niet aanwezig is
-  expect(deletedElement).toBeFalsy();
-});

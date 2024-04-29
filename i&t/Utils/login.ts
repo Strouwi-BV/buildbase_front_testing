@@ -1,4 +1,5 @@
 async function login(page) {
+
   await page.goto("https://backoffice-dev.buildbase.be/login");
   await page.getByLabel("Email").click();
   await page.getByLabel("Email").fill("Kyan.decerf@student.ucll.be");

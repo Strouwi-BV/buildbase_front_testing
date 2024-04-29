@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+
 import path from "path";
 const { login } = require("../Utils/login");
 test.beforeEach("Login", async ({ page }) => {
@@ -90,4 +91,5 @@ test("manageProjectImagesTest", async ({ page }) => {
   expect(deleteMessage).toContain(
     "Project afbeeldingen werden succesvol verwijderd"
   );
+
 });
