@@ -88,7 +88,7 @@ test.describe("Trial subscription", () => {
   test.use({ baseURL: "https://backoffice-dev.buildbase.be" });
 
   test("Trial subscription account", async () => {
-    //navigation to builbase page
+    //navigation to builbase page and clicking on trail subscription
     await page.goto("https://backoffice-dev.buildbase.be/");
     await page.locator("(//a[normalize-space()='Registreer.'])[1]").click();
     //filling out form fields
