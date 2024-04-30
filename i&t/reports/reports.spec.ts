@@ -15,8 +15,6 @@ test('get started link', async ({ page }) => {
     await page.click("//div[@class='v-list-item__title'][normalize-space()='Alle']");
     await page.getByRole("button", { name: "Deze maand" }).click();
     await page.click("//div[@class='v-list-item__title'][normalize-space()='Dit jaar']");
-    await page.waitForTimeout(1000);
     await page.getByRole("button", { name: "TOON DATA" }).click();
-    await page.waitForTimeout(3000);
 });
 
