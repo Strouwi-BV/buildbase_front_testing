@@ -10,11 +10,11 @@ test.beforeEach('Login', async ({ page }) => {
 test('get started link', async ({ page }) => {
     await page.goto('https://backoffice-dev.buildbase.be/hours');
     await page.getByRole("button", { name: "Optie" }).click();
-    await page.getByRole("option", { name: "Personen" }).click();
-    await page.getByRole("button", { name: "Personeelslid" }).click();  // Afhankelijk van de keuze Optie !!
-    await page.getByRole("option", { name: "Kyan Decerf" }).click();
+    await page.click("(//div[@role='option'])[2]");
+    await page.getByRole("button", { name: "Personeelslid" }).click();
+    await page.click("//div[@class='v-list-item__title'][normalize-space()='Alle']");
     await page.getByRole("button", { name: "Deze maand" }).click();
-    await page.getByRole("option", { name: "Dit jaar" }).click();
+    await page.click("//div[@class='v-list-item__title'][normalize-space()='Dit jaar']");
     await page.waitForTimeout(1000);
     await page.getByRole("button", { name: "TOON DATA" }).click();
     await page.waitForTimeout(3000);
