@@ -14,9 +14,12 @@ test.afterAll(async () => {
   await page.context().close();
 });
 
-test("test", async () => {
+test("addInvoice", async () => {
+  //navigate to invoice page & adding a new invoice
   await page.getByRole("link", { name: "Facturatie" }).click();
   await page.getByRole("button", { name: "Nieuwe factuur" }).click();
+
+  //Filling out necessary invoice information
   await page.getByRole("button", { name: "Klant *" }).click();
   await page.click("(//div[@role='option'])[1]");
   await page.getByLabel("Factuurnummer").click();
@@ -34,6 +37,8 @@ test("test", async () => {
   await page.getByLabel("Bedrag per uur (€)").click();
   await page.getByLabel("Bedrag per uur (€)").fill("100");
   await page.getByRole("main").locator("button").nth(3).click();
+
+  //Generate the invoice
   await page.getByRole("button", { name: "Genereer" }).click();
   await page.getByText("Factuur werd succesvol").click();
 });
