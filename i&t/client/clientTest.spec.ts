@@ -50,21 +50,21 @@ test("FilterAndSearch", async () => {
 
   //navigate to the customers page
   await page.locator("(//div[contains(text(),'Klanten')])[1]").click();
+
   //clicking on filer opitons
   await page
     .locator(
       "(//button[@class='tertiary text-none v-btn v-btn--outlined theme--light v-size--default mr-2'])[1]"
     )
     .click();
+
   await page.waitForTimeout(1000);
   //clicking on the filer options and deactivate the filter option
   await page.locator("(//label[normalize-space()='Actief'])[1]").click();
   await page.waitForTimeout(1000);
   await page.locator("(//label[normalize-space()='Actief'])[1]").click();
-  await page.locator("(//div)[117]").click();
   await page.waitForTimeout(1000);
   //search with a filter
   await page.locator("(//input[@type='search'])[1]").click();
-  await page.locator("(//div)[117]").click();
   await page.locator("(//input[@type='search'])[1]").fill("testen");
 });
