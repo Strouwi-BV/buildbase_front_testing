@@ -9,7 +9,16 @@ let page;
 test.beforeAll(async ({ browser }) => {
   const context = await browser.newContext();
   page = await context.newPage();
-  await login(page);
+
+  //Login in to another account with less 'werknemers' otherwise it cant find the button personeelslid.
+  // This is because the dropdown loads very slow caused by the amount of werknemers on the account (kyan.decerf@student.ucll.be)
+  await page.goto("https://backoffice-dev.buildbase.be/login");
+  await page.getByLabel("Email").click();
+  await page.getByLabel("Email").fill("dkyan007@gmail.com");
+  await page.getByLabel("Wachtwoord", { exact: true }).click();
+  await page.getByLabel("Wachtwoord", { exact: true }).fill("Test123");
+  await page.getByRole("button", { name: "Inloggen" }).click();
+  await page.waitForNavigation();
 });
 
 //closing the browser session after tests
@@ -39,6 +48,9 @@ test("testTeamsBT13", async () => {
   await page.waitForTimeout(3000);
 
   await page.goto("https://backoffice-dev.buildbase.be/teams");
+
+  // Wait for the page to load
+  await page.waitForLoadState("networkidle");
 
   await page.getByRole("button", { name: "Nieuw team" }).click();
 
