@@ -85,10 +85,4 @@ test("testTeamsBT13", async () => {
   await teamRow.locator('button[type="button"]:nth-child(3)').click();
 
   await page.getByRole("button", { name: "Bevestig" }).click();
-
-  await page.waitForTimeout(3000);
-
-  await page.goto("https://backoffice-dev.buildbase.be/settings/parameters");
-
-  await page.click("(//div[@class='v-input__slot'])[6]");
 });
